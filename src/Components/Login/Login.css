@@ -1,4 +1,23 @@
 .login{
     height: 100vh;
-    background-color: #DEE5E5;
+    background-color: #c7d2d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.login input::placeholder{
+    color: rgb(117, 117, 117);
+}
+.login_holder{
+    margin:100px 100px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.login_holder img{
+    width: 150px;
 }
