@@ -1,0 +1,31 @@
+ // useEffect(()=>{
+      
+  //       axios({
+  //         url: 'http://localhost:4000/',
+  //         method: 'post',
+  //         headers:{'x-auth-token':"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjp7Il9pZCI6IjVmZjU2MTJmMzlmYzg4NTE3MDBkMTYyZSIsImVtYWlsIjoiYXJpcy5nYW5pQGdtYWlsLmNvbSJ9LCJpYXQiOjE2MDk5Mzg0MzIsImV4cCI6MTYxMDAyNDgzMn0.NKxzytWl5HDK6EROhzuvJk61mFF1O5lWVNaJw6Ik49I"},
+  //         data: {
+  //           query: `
+  //           query{
+  //             getPosts{
+  //               Title
+  //               _id
+  //               Likes{
+  //                 Name
+  //               }
+  //               user{
+  //                 Name
+  //                 _id
+  //               }
+  //               comments{
+  //                 Text
+  //               }
+  //             }
+  //           }
+  //             `
+  //         }
+  //       }).then((result) => {
+  //         console.log(result.data)
+  //       });
+      
+  // },[])
