@@ -52,6 +52,7 @@ const Signup = (props) => {
                     }
                 }).then((result) => {
                     localStorage.setItem("user",result.data)
+                    props.history.push('/signin')
                 });
             }} colorScheme="blue">Signup</Button>
             </div>

@@ -39,6 +39,7 @@ const Login = (props) => {
                     }
                 }).then((result) => {
                     localStorage.setItem("x-auth-token",result.data.data.signin)
+                    props.history.push('/home')
                     // console.log(result)
                 });
             }} colorScheme="blue">Login</Button>
