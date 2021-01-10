@@ -1,17 +1,26 @@
-import React, { useState } from 'react'
-import './Login.css'
+import React, { useEffect, useState } from 'react'
+import './Signup.css'
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
 import axios from 'axios'
-const Login = (props) => {
+const Signup = (props) => {
+    const [name, setName] = useState('')
+    const [age, setAge] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [show, setShow] = useState(false)
     const handleHide = () => setShow(!show)
-    return (
-        <div className="login">
-            <div className="login_holder">
+
+    useEffect(()=>{
+        console.log("HERE")
+    })
+
+    return (    
+        <div className="signup">
+            <div className="signup_holder">
                 <img src={process.env.PUBLIC_URL+'/Logo/dark.png'}></img>
-                <h1>Login</h1>
+                <h1>Signup</h1>
+                <Input placeholder="Enter Name" size="md" onChange={(e) => { setName(e.target.value) }} />
+                <Input placeholder="Enter Age" size="md" onChange={(e) => { setAge(e.target.value) }} />
             <Input placeholder="Enter Email" size="md" onChange={(e) => { setEmail(e.target.value) }} />
             <InputGroup size="md">
                 <Input
@@ -32,20 +41,23 @@ const Login = (props) => {
                     method: 'post',
                     data: {
                         query: `
-            mutation{
-                signin(email:"${email}",pass:"${password}")
-                }
+                        mutation{
+                            createUser(email:"${email}",Age:${age},name:"${name}",password:"${password}"){
+                              Name
+                              _id
+                              Age
+                            }
+                          }
               `
                     }
                 }).then((result) => {
-                    localStorage.setItem("x-auth-token",result.data.data.signin)
-                    // console.log(result)
+                    localStorage.setItem("user",result.data)
                 });
-            }} colorScheme="blue">Login</Button>
+            }} colorScheme="blue">Signup</Button>
             </div>
         </div>
     )
 
 }
 
-export default Login
+export default Signup

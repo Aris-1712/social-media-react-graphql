@@ -1,0 +1,23 @@
+.signup{
+    height: 100vh;
+    background-color: #c7d2d2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.signup input::placeholder{
+    color: rgb(117, 117, 117);
+}
+.signup_holder{
+    margin:100px 100px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.signup_holder img{
+    width: 150px;
+}
