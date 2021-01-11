@@ -10,37 +10,37 @@ const Signup = (props) => {
     const [show, setShow] = useState(false)
     const handleHide = () => setShow(!show)
 
-    useEffect(()=>{
+    useEffect(() => {
         console.log("HERE")
     })
 
-    return (    
+    return (
         <div className="signup">
             <div className="signup_holder">
-                <img src={process.env.PUBLIC_URL+'/Logo/dark.png'}></img>
+                <img src={process.env.PUBLIC_URL + '/Logo/dark.png'}></img>
                 <h1>Signup</h1>
                 <Input placeholder="Enter Name" size="md" onChange={(e) => { setName(e.target.value) }} />
                 <Input placeholder="Enter Age" size="md" onChange={(e) => { setAge(e.target.value) }} />
-            <Input placeholder="Enter Email" size="md" onChange={(e) => { setEmail(e.target.value) }} />
-            <InputGroup size="md">
-                <Input
-                    pr="4.5rem"
-                    type={show ? "text" : "password"}
-                    placeholder="Enter Password"
-                    onChange={(e) => { setPassword(e.target.value) }}
-                />
-                <InputRightElement width="4.5rem">
-                    <Button h="1.75rem" size="sm" onClick={handleHide}>
-                        {show ? "Hide" : "Show"}
-                    </Button>
-                </InputRightElement>
-            </InputGroup>
-            <Button onClick={() => {
-                axios({
-                    url: 'http://localhost:4000/',
-                    method: 'post',
-                    data: {
-                        query: `
+                <Input placeholder="Enter Email" size="md" onChange={(e) => { setEmail(e.target.value) }} />
+                <InputGroup size="md">
+                    <Input
+                        pr="4.5rem"
+                        type={ show ? "text" : "password" }
+                        placeholder="Enter Password"
+                        onChange={(e) => { setPassword(e.target.value) }}
+                    />
+                    <InputRightElement width="4.5rem">
+                        <Button h="1.75rem" size="sm" onClick={ handleHide }>
+                            {show ? "Hide" : "Show"}
+                        </Button>
+                    </InputRightElement>
+                </InputGroup>
+                <Button onClick={() => {
+                    axios({
+                        url: 'http://localhost:4000/',
+                        method: 'post',
+                        data: {
+                            query: `
                         mutation{
                             createUser(email:"${email}",Age:${age},name:"${name}",password:"${password}"){
                               Name
@@ -49,12 +49,12 @@ const Signup = (props) => {
                             }
                           }
               `
-                    }
-                }).then((result) => {
-                    localStorage.setItem("user",result.data)
-                    props.history.push('/signin')
-                });
-            }} colorScheme="blue">Signup</Button>
+                        }
+                    }).then((result) => {
+                        localStorage.setItem("user", result.data)
+                        props.history.push('/signin')
+                    });
+                }} colorScheme="blue">Signup</Button>
             </div>
         </div>
     )
