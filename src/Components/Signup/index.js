@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import './Signup.css'
 import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
 import axios from 'axios'
+import { Api } from '../../API/Api'
 const Signup = (props) => {
     const [name, setName] = useState('')
     const [age, setAge] = useState('')
@@ -37,7 +38,7 @@ const Signup = (props) => {
                 </InputGroup>
                 <Button onClick={() => {
                     axios({
-                        url: 'http://localhost:4000/',
+                        url: Api,
                         method: 'post',
                         data: {
                             query: `
