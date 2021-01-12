@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Axios from 'axios'
 import Post from '../Post'
 import { withRouter } from 'react-router'
+import { Api } from '../../API/Api'
 const Posts=(props)=>{
 
     const [posts,setPosts]=useState([])
@@ -10,7 +11,7 @@ useEffect(()=>{
     
 const getData=async()=>{
     try{
-    let data=await Axios.post('http://localhost:4000/',  {
+    let data=await Axios.post(Api,  {
         query: `
         query{
             getPosts{
@@ -25,6 +26,7 @@ const getData=async()=>{
               user{
                 Name
                 _id
+                image
               }
               comments{
                 Text
