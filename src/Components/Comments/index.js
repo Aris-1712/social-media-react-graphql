@@ -3,13 +3,16 @@ import './Comments.css'
 import Comment from '../Comment'
 const Comments=(props)=>{
     const [comments,setComments]=useState([])
+    
     useEffect(()=>{
         setComments([...props.comments])
-    }
-    ,[props.comments])
+    },[props])
+
+    console.log(comments[comments.length-1])
+    console.log(comments)
     return(
     <div className="comments">
-        {comments.map((ele)=>{
+        {props.home?<Comment item={comments[comments.length-1]}></Comment> :comments.map((ele)=>{
             return(
                 <Comment item={ele}></Comment>
             )

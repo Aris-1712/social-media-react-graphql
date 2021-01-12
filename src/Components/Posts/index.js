@@ -3,16 +3,17 @@ import Axios from 'axios'
 import Post from '../Post'
 import { withRouter } from 'react-router'
 import { Api } from '../../API/Api'
-const Posts=(props)=>{
+import Comments from '../Comments'
+const Posts = (props) => {
 
-    const [posts,setPosts]=useState([])
+  const [posts, setPosts] = useState([])
 
-useEffect(()=>{
-    
-const getData=async()=>{
-    try{
-    let data=await Axios.post(Api,  {
-        query: `
+  useEffect(() => {
+
+    const getData = async () => {
+      try {
+        let data = await Axios.post(Api, {
+          query: `
         query{
             getPosts{
               Title
@@ -33,30 +34,47 @@ const getData=async()=>{
                 user{
                   Name
                   _id
+                  image
                 }
               }
             }
           }
 `
-    },{headers:{
-        "x-auth-token":localStorage.getItem("x-auth-token")
-    }})
+        }, {
+          headers: {
+            "x-auth-token": localStorage.getItem("x-auth-token")
+          }
+        })
 
-    setPosts([...data.data.data.getPosts])
-}catch(err){
-    props.history.push('/signin')
-}
-}
-getData()
+        setPosts([...data.data.data.getPosts])
+      } catch (err) {
+        props.history.push('/signin')
+      }
+    }
+    getData()
 
-},[])
-    return(
-posts.map((ele)=>{
-    return(
-        <Post post={ele}></Post>
-    )
-})
-)
+  }, [])
+  const onPost = (val, postid) => {
+    let temp = []
+    posts.map((ele) => {
+      if (ele._id == postid) {
+        ele.comments.push({ Text: val, user: { ...ele.user } })
+      }
+      temp.push(ele)
+    })
+    setPosts([...temp])
+  }
+  console.log("rerender", posts)
+  return (
+    posts.map((ele) => {
+      console.log(ele.comments)
+      return (
+        <Post postcomment={onPost} post={ele}>
+          <Comments home={true} comments={ele.comments}></Comments>
+        </Post>
+      )
+    })
+  )
 
 }
 

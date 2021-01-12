@@ -52,7 +52,7 @@ const Postdetail = (props) => {
       </div> :
         
           <Post post={post}>
-          <Comments comments={post.comments}></Comments>
+          <Comments home={false} comments={post.comments}></Comments>
           </Post>
        
       }
