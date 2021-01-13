@@ -17,6 +17,13 @@
     display: inline;
     cursor: pointer;
 }
+.like_text{
+    display: inline;
+    cursor: pointer;
+}
+.like_text:hover{
+    text-decoration: underline;
+}
 .comment_text:hover{
     text-decoration: underline;
 }

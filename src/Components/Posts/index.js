@@ -24,6 +24,7 @@ const Posts = (props) => {
               Likes{
                 Name
                 _id
+                image
               }
               user{
                 Name

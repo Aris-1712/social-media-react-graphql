@@ -2,9 +2,11 @@ import React, { useState } from 'react'
 import { Divider, Input, Text, Button, Avatar } from "@chakra-ui/react"
 import './Post.css'
 import { withRouter } from 'react-router'
+import PostModel from './PostModel'
 const Post = (props) => {
     let post = props.post
     const [comment,setComment]=useState('')
+    const [likeModal,setLikeModal]=useState(false)
     console.log("HERE")
     return (
         <div className="post">
@@ -12,7 +14,7 @@ const Post = (props) => {
             <Divider className="divider" />
             <img class="post_img" src={post.Image}></img>
             <Divider className="divider" />
-            <div><i class="fa fa-thumbs-up" aria-hidden="true" style={{ color: "#e64949", fontSize: 20, marginRight: 10 }}></i>{`${post.Likes ? post.Likes.length : 0} Likes`} <i style={{ color: "#082d0f", fontSize: 20, marginLeft: 20, marginRight: 10 }} class="fa fa-comments" aria-hidden="true"></i><Text onClick={() => {
+            <div><i class="fa fa-thumbs-up" aria-hidden="true" style={{ color: "#e64949", fontSize: 20, marginRight: 10 }}></i><Text className="like_text" onClick={()=>{setLikeModal(true)}}>{`${post.Likes ? post.Likes.length : 0} Likes`}</Text><i style={{ color: "#082d0f", fontSize: 20, marginLeft: 20, marginRight: 10 }} class="fa fa-comments" aria-hidden="true"></i><Text onClick={() => {
                 if (props.location.pathname === '/home') {
                     props.history.push(`/post/${post._id}`)
                 }
@@ -35,7 +37,7 @@ const Post = (props) => {
                 POST
                     </Button>
             </div>
-
+                    <PostModel Likes={post.Likes} open={likeModal} close={()=>{setLikeModal(false)}}></PostModel>
         </div>
     )
 

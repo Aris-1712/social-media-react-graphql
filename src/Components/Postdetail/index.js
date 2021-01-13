@@ -33,6 +33,8 @@ const Postdetail = (props) => {
                       }
                       Likes{
                         Name
+                        image
+                        _id
                       }
                       
                     }
