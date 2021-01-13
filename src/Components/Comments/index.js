@@ -8,12 +8,11 @@ const Comments=(props)=>{
         setComments([...props.comments])
     },[props])
 
-    console.log(comments[comments.length-1])
-    console.log(comments)
+   
     return(
     <div className="comments">
         {props.home?<Comment item={comments[comments.length-1]}></Comment> :comments.map((ele)=>{
-            console.log(ele,"-------")
+           
             return(
                 <Comment item={ele}></Comment>
             )

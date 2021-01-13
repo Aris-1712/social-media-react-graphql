@@ -3,7 +3,7 @@ import React from 'react'
 import './Comment.css'
 import moment from 'moment'
 const Comment=(props)=>{
-    console.log(props.item)
+    
     let comment=props.item
     if(comment){
     return(

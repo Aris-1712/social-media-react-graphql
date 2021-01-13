@@ -4,59 +4,20 @@ import Post from '../Post'
 import { withRouter } from 'react-router'
 import { Api } from '../../API/Api'
 import Comments from '../Comments'
-
+import * as Actions from '../../Reducer/Actions' 
+import { connect } from 'react-redux'
+import { postComment } from '../../API/calls'
 const Posts = (props) => {
-
+  
   const [posts, setPosts] = useState([])
-
+  useEffect(()=>{
+    props.getPosts()
+  },[])
   useEffect(() => {
 
-    const getData = async () => {
-      try {
-        let data = await Axios.post(Api, {
-          query: `
-        query{
-            getPosts{
-              Title
-              Body
-              Image
-              _id
-              Likes{
-                Name
-                _id
-                image
-              }
-              user{
-                Name
-                _id
-                image
-              }
-              comments{
-                Text
-                time
-                user{
-                  Name
-                  _id
-                  image
-                }
-              }
-            }
-          }
-`
-        }, {
-          headers: {
-            "x-auth-token": localStorage.getItem("x-auth-token")
-          }
-        })
-
-        setPosts([...data.data.data.getPosts])
-      } catch (err) {
-        props.history.push('/signin')
-      }
-    }
-    getData()
-
-  }, [])
+    setPosts([...props.posts])
+      
+  }, [props.posts])
 
   const onPost = async(val, postid) => {
     let temp = []
@@ -68,31 +29,18 @@ const Posts = (props) => {
       temp.push(ele)
     })
     setPosts([...temp])
-    let data = await Axios.post(Api, {
-      query: `
-      mutation{
-        createComment(pid:"${postid}",text:"${val}",time:"${new Date().toISOString()}"){
-          Text
-          user{
-            Name
-          }
-        }
-      }
-`
-    }, {
-      headers: {
-        "x-auth-token": localStorage.getItem("x-auth-token")
-      }
-    })
+
+let data=await postComment(postid,val)
     if(data.error){
       setPosts([...tempPosts])
+      props.getPosts()
       alert("Something went wrong")
     }
   }
-  console.log("rerender", posts)
+ 
   return (
     posts.map((ele) => {
-      console.log(ele.comments)
+
       return (
         <Post postcomment={onPost} post={ele}>
           <Comments home={true} comments={ele.comments}></Comments>
@@ -102,5 +50,14 @@ const Posts = (props) => {
   )
 
 }
-
-export default withRouter(Posts)
+const mapActionsToProps=(dispatch)=>{
+  return({
+      getPosts:()=>{dispatch(Actions.getPostsAction())}
+  })
+}
+const mapActionsToState=(state)=>{
+  return({
+      posts:state.posts
+  })
+}
+export default withRouter(connect(mapActionsToState,mapActionsToProps)(Posts))

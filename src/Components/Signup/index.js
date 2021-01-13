@@ -11,9 +11,7 @@ const Signup = (props) => {
     const [show, setShow] = useState(false)
     const handleHide = () => setShow(!show)
 
-    useEffect(() => {
-        console.log("HERE")
-    })
+   
 
     return (
         <div className="signup">

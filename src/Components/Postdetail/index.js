@@ -3,51 +3,20 @@ import Axios from 'axios'
 import { withRouter } from 'react-router'
 import { Button, Divider, Input, Skeleton, Text } from '@chakra-ui/react'
 import { Api } from '../../API/Api'
+import * as Actions from '../../Reducer/Actions' 
 import './Postdetail.css'
 import Post from '../Post'
 import Comments from '../Comments'
+import { getPost, postComment } from '../../API/calls'
+import { connect } from 'react-redux'
 const Postdetail = (props) => {
   const [post, setPost] = useState({})
   useEffect(() => {
-    const getPost = async () => {
-      let data = await Axios.post(Api, {
-        query: `mutation{
-                    getPost(id:"${props.match.params.id}"){
-                      Title
-                      _id
-                      Body
-                      Image
-                      user{
-                        Name
-                        _id
-                        image
-                      }
-                      comments{
-                        time
-                          Text
-                        user{
-                          image
-                          Name
-                          _id
-                        }
-                      }
-                      Likes{
-                        Name
-                        image
-                        _id
-                      }
-                      
-                    }
-                  }`
-      }, {
-        headers: {
-          "x-auth-token": localStorage.getItem("x-auth-token")
-        }
-      })
-      console.log(data.data.data.getPost)
-      setPost(data.data.data.getPost)
+    const getPostDetail=async()=>{
+      let data=await getPost(props.match.params.id)
+      setPost(data)
     }
-    getPost()
+    getPostDetail()
   }, [])
   // ----------------
   const onPost = async(val, postid) => {
@@ -57,24 +26,10 @@ const Postdetail = (props) => {
     // ele.comments.push({ Text: val, user: { ...ele.user } })
       
     setPost({...temp})
-    let data = await Axios.post(Api, {
-      query: `
-      mutation{
-        createComment(pid:"${postid}",text:"${val}",time:"${new Date().toISOString()}"){
-          Text
-          user{
-            Name
-          }
-        }
-      }
-`
-    }, {
-      headers: {
-        "x-auth-token": localStorage.getItem("x-auth-token")
-      }
-    })
+    let data=await postComment(postid,val)
     if(data.error){
       setPost({...tempPost})
+      props.getPosts()
       alert("Something went wrong")
     }
   }
@@ -94,5 +49,14 @@ const Postdetail = (props) => {
   )
 
 }
-
-export default withRouter(Postdetail)
+const mapActionsToProps=(dispatch)=>{
+  return({
+      getPosts:()=>{dispatch(Actions.getPostsAction())}
+  })
+}
+const mapActionsToState=(state)=>{
+  return({
+      posts:state.posts
+  })
+}
+export default withRouter(connect(mapActionsToState,mapActionsToProps)(Postdetail))
