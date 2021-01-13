@@ -1,6 +1,7 @@
 import { Avatar, Text } from '@chakra-ui/react'
 import React from 'react'
 import './Comment.css'
+import moment from 'moment'
 const Comment=(props)=>{
     console.log(props.item)
     let comment=props.item
@@ -11,6 +12,7 @@ const Comment=(props)=>{
             <div className="comment_sec">
             <Text fontSize="sm" style={{fontWeight:600}}>{comment.user.Name}</Text>
             <Text fontSize="sm" style={{wordBreak:"breal-all"}}>{comment.Text}</Text>
+            <Text fontSize="xs" style={{wordBreak:"breal-all",color:"grey"}}>{moment(comment.time).fromNow()}</Text>
             </div>
         </div>
     )}

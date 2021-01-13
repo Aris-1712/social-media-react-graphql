@@ -13,6 +13,7 @@ const Comments=(props)=>{
     return(
     <div className="comments">
         {props.home?<Comment item={comments[comments.length-1]}></Comment> :comments.map((ele)=>{
+            console.log(ele,"-------")
             return(
                 <Comment item={ele}></Comment>
             )

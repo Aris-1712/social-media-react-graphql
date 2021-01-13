@@ -4,6 +4,7 @@ import Post from '../Post'
 import { withRouter } from 'react-router'
 import { Api } from '../../API/Api'
 import Comments from '../Comments'
+
 const Posts = (props) => {
 
   const [posts, setPosts] = useState([])
@@ -31,6 +32,7 @@ const Posts = (props) => {
               }
               comments{
                 Text
+                time
                 user{
                   Name
                   _id
@@ -54,8 +56,10 @@ const Posts = (props) => {
     getData()
 
   }, [])
-  const onPost = (val, postid) => {
+
+  const onPost = async(val, postid) => {
     let temp = []
+    let tempPosts=[...posts]
     posts.map((ele) => {
       if (ele._id == postid) {
         ele.comments.push({ Text: val, user: { ...ele.user } })
@@ -63,6 +67,26 @@ const Posts = (props) => {
       temp.push(ele)
     })
     setPosts([...temp])
+    let data = await Axios.post(Api, {
+      query: `
+      mutation{
+        createComment(pid:"${postid}",text:"${val}",time:"${new Date().toISOString()}"){
+          Text
+          user{
+            Name
+          }
+        }
+      }
+`
+    }, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token")
+      }
+    })
+    if(data.error){
+      setPosts([...tempPosts])
+      alert("Something went wrong")
+    }
   }
   console.log("rerender", posts)
   return (
