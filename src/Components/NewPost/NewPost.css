@@ -1,0 +1,13 @@
+.newPostHolder{
+height: auto;
+    border-radius: 5px;
+    border:1px solid rgb(197 226 219);
+    margin-bottom: 10px;}
+.newpost{
+    
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    align-items: center;
+    
+}
