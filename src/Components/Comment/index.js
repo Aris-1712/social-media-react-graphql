@@ -11,13 +11,13 @@ const Comment=(props)=>{
             <Avatar size="sm" name={comment.user.Name} src={comment.user.image} />
             <div className="comment_sec">
             <Text fontSize="sm" style={{fontWeight:600}}>{comment.user.Name}</Text>
-            <Text fontSize="sm" style={{wordBreak:"breal-all"}}>{comment.Text}</Text>
-            <Text fontSize="xs" style={{wordBreak:"breal-all",color:"grey"}}>{moment(comment.time).fromNow()}</Text>
+            <Text fontSize="sm" style={{wordBreak:"break-all"}}>{comment.Text}</Text>
+            <Text fontSize="xs" style={{wordBreak:"break-all",color:"grey"}}>{moment(comment.time).fromNow()}</Text>
             </div>
         </div>
     )}
     else{
-        return(<div>Loading</div>)
+        return(<div>No Comments.</div>)
     }
 
 }

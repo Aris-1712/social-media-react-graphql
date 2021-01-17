@@ -1,4 +1,4 @@
-import {getPosts, signin} from '../API/calls'
+import {getPosts, signin, getUser} from '../API/calls'
 
 const singinThunk=(payLoad)=>{
   
@@ -28,3 +28,11 @@ export const getPostsAction=()=>{
         return(dispatch(getPostThunk([...res])))
     })
 }
+
+export const getUserThunk=(data)=>{
+    return (async(dispatch)=>{
+        let res=await getUser(data)
+      
+        return(dispatch(singinThunk(res)))
+    })
+    }

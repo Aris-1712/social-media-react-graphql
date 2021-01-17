@@ -1,5 +1,6 @@
 import { Api } from "./Api"
 import Axios from 'axios'
+import { Redirect } from "react-router"
 export const signin=(data)=>{
     return new Promise((resolve,reject)=>{
         Axios({
@@ -26,7 +27,8 @@ export const signin=(data)=>{
 
 }
 
-const getUser=async(email)=>{
+export const getUser=async(email)=>{
+  try{
     let data = await Axios.post(Api, {
         query: `mutation{
             getUser(email:"${email}"){
@@ -69,13 +71,20 @@ const getUser=async(email)=>{
 
           }
 }`
-      }, {
+      }
+      , {
         headers: {
           "x-auth-token": localStorage.getItem("x-auth-token")
         }
-      })
-      
+      }
+      )
+      console.log(data)
+      localStorage.setItem("user_email",email)
       return data
+    }catch(err){
+      
+      <Redirect path='/Signin'></Redirect>
+    }
 }
 
 
@@ -193,4 +202,32 @@ export const getPost=(id)=>{
           })
     })
 
+}
+
+export const createPost=(data)=>{
+  return new Promise((resolve,reject)=>{
+       Axios.post(Api, {
+          query: `
+          mutation{
+            createPost(title:"${data.title}",body:"${data.body}",Image:"${data.Image}",time:"${data.time}"){
+              Title
+              _id
+              user{
+                Name
+              }
+              comments{
+                id
+              }
+            }
+          }
+    `
+        }, {
+          headers: {
+            "x-auth-token": localStorage.getItem("x-auth-token")
+          }
+        }).then((data)=>{
+          resolve(data)
+      })
+  })
+  
 }

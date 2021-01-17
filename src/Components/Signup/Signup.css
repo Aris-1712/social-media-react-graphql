@@ -9,9 +9,10 @@
 .signup input::placeholder{
     color: rgb(117, 117, 117);
 }
+
 .signup_holder{
     margin:100px 100px;
-    height: 500px;
+    height: 650px;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
