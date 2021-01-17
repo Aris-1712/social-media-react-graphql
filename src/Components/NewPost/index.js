@@ -8,8 +8,10 @@ import { BsImageAlt } from 'react-icons/bs'
 import firebase from '../../Firebase/firebase'
 import { v4 as uuidv4 } from 'uuid';
 import {createPost} from '../../API/calls'
+import { useToast } from "@chakra-ui/react"
 import './NewPost.css'
 const NewPost = (props) => {
+    const toast = useToast()
     const [user, setUser] = useState({})
     const [titleInput, setTitleInput] = useState(false)
     const [image, setImage] = useState(null)
@@ -17,10 +19,11 @@ const NewPost = (props) => {
     const [body,setBody]=useState('')
     useEffect(() => {
         props.getUser()
+        
     }, [])
     useEffect(() => {
         console.log(props.user)
-        if ("data" in props.user) {
+        if ("data" in props.user && !("error" in props.user.data)) {
 
             setUser(props.user.data.data.getUser)
         }
@@ -67,7 +70,21 @@ const NewPost = (props) => {
         }
         let result=await createPost(data)
         props.getPosts()
+        clear()
+        toast({
+            title: "Posted successfully.",
+            
+            status: "success",
+            duration: 9000,
+            isClosable: true,
+          })
 
+    }
+    const clear=()=>{
+        setImage(null)
+        setTitle('')
+        setTitleInput(false)
+        setBody('')
     }
     return (<div>{
         Object.keys(user).length !== 0 ? <div className="newPostHolder" style={{ display: "flex", flexDirection: "column" }}>
@@ -75,8 +92,8 @@ const NewPost = (props) => {
                 <Avatar size="md" name={user.Name} src={user.image} />
                 <div style={{ display: "flex", flexDirection: "column", width: "100%", padding: 10 }}>
                     {image ? <img style={{ marginBottom: 10 }} src={URL.createObjectURL(image)}></img> : null}
-                    <Input style={{ borderRadius: 15, height: 75, marginLeft: 10 }} placeholder={`What's on your mind, ${user.Name.split(' ')[0]} ?`} size="lg" />
-                    <Input placeholder="Enter title" style={{ visibility: titleInput ? "visible" : "hidden", height: titleInput ? 50 : 0, borderRadius: 15, marginLeft: 10, marginTop: 20, transition: "height 0.2s,visibility 0.1s" }}></Input>
+                    <Input onChange={(e)=>{setBody(e.target.value)}} style={{ borderRadius: 15, height: 75, marginLeft: 10 }} placeholder={`What's on your mind, ${user.Name.split(' ')[0]} ?`} size="lg" />
+                    <Input onChange={(e)=>{setTitle(e.target.value)}} placeholder="Enter title" style={{ visibility: titleInput ? "visible" : "hidden", height: titleInput ? 50 : 0, borderRadius: 15, marginLeft: 10, marginTop: 20, transition: "height 0.2s,visibility 0.1s" }}></Input>
                 </div>
             </div>
             <Divider></Divider>

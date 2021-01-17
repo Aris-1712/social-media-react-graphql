@@ -24,7 +24,7 @@ const Posts = (props) => {
     let tempPosts=[...posts]
     posts.map((ele) => {
       if (ele._id == postid) {
-        ele.comments.push({ Text: val, user: { ...ele.user } })
+        ele.comments.push({ Text: val, user: { ...props.user.data.data.getUser } })
       }
       temp.push(ele)
     })
@@ -57,7 +57,8 @@ const mapActionsToProps=(dispatch)=>{
 }
 const mapActionsToState=(state)=>{
   return({
-      posts:state.posts
+      posts:state.posts,
+      user:state.user
   })
 }
 export default withRouter(connect(mapActionsToState,mapActionsToProps)(Posts))
