@@ -11,6 +11,7 @@ const Posts = (props) => {
   
   const [posts, setPosts] = useState([])
   useEffect(()=>{
+    console.log("HERE")
     props.getPosts()
   },[])
   useEffect(() => {
