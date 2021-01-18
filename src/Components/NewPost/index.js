@@ -60,10 +60,14 @@ const NewPost = (props) => {
         })
     }
     const Post=async()=>{
-        let filename=uuidv4()
-        let res=await uploadImage(filename)
+        let res=null
+        if(image){
+            let filename=uuidv4()
+            res=await uploadImage(filename)
+        }
+        
         let data={
-            Image:res,
+            Image:image?res:"",
             body:body,
             title:title,
             time:new Date()

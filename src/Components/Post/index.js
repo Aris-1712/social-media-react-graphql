@@ -99,16 +99,17 @@ const Post = (props) => {
         <div className="post">
             <div style={{ display: "flex", alignItems: "center" }}><Avatar size="sm" name={post.user.Name} src={post.user.image} /><Text fontSize="md" style={{ fontWeight: 600, marginLeft: 10 }}>{post.user.Name}</Text></div>
             <Divider className="divider" />
-            <img class="post_img" src={post.Image}></img>
+            {post.Image!==""?<><img class="post_img" src={post.Image}></img>
+            <Divider className="divider" />
+            </>:null}
+            <Text fontSize="sm" style={{ fontWeight: 600 }}>{post.Title}</Text>
+            <Text fontSize="sm">{post.Body}</Text>
             <Divider className="divider" />
             <div>{like?<i onClick={dislikePost} class="fa fa-thumbs-up" aria-hidden="true" style={{ color: "#e64949", fontSize: 20, marginRight: 10, cursor:"pointer" }}></i>:<i onClick={likePost} class="fa fa-thumbs-o-up" aria-hidden="true" style={{ color: "#e64949", fontSize: 20, marginRight: 10,cursor:"pointer" }}></i>}<Text className="like_text" onClick={()=>{setLikeModal(true)}}>{`${post.Likes ? post.Likes.length : 0} Likes`}</Text><i style={{ color: "#082d0f", fontSize: 20, marginLeft: 20, marginRight: 10 }} class="fa fa-comments" aria-hidden="true"></i><Text onClick={() => {
                 if (props.location.pathname === '/home') {
                     props.history.push(`/post/${post._id}`)
                 }
             }} className="comment_text">{`${post.comments ? post.comments.length : 0} Comments`}</Text></div>
-            <Divider className="divider" />
-            <Text fontSize="sm" style={{ fontWeight: 600 }}>{post.Title}</Text>
-            <Text fontSize="sm">{post.Body}</Text>
             <Divider className="divider" />
             {props.children !== undefined ?
                 <div>{props.children}

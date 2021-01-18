@@ -14,10 +14,15 @@ export const signin=(data)=>{
       `
             }
         }).then((result) => {
-           
-            localStorage.setItem("x-auth-token",result.data.data.signin)
-            let user=getUser(data.email)
-            resolve(user)
+            if ("errors" in result.data) {
+            alert("Incorrect username or password")
+            reject(result.data.errors[0].message)
+            } else {
+              localStorage.setItem("x-auth-token",result.data.data.signin)
+              let user=getUser(data.email)
+              resolve(user)
+            }
+          
         }).catch(err=>{
             alert("Incorrect username or password")
             reject(err)
