@@ -40,14 +40,25 @@ let data=await postComment(postid,val)
   }
  
   return (
-    posts.map((ele) => {
+    <>
+    {props.profile?posts.map((ele) => {
+      console.log(props.profile,ele._id)
+if(ele.user._id===props.profile){
+  
+return (
+  <Post postcomment={onPost} post={ele}>
+    <Comments home={true} comments={ele.comments}></Comments>
+  </Post>
+)}
+}) :posts.map((ele) => {
 
       return (
         <Post postcomment={onPost} post={ele}>
           <Comments home={true} comments={ele.comments}></Comments>
         </Post>
       )
-    })
+    })}
+    </>
   )
 
 }

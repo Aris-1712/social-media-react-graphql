@@ -97,7 +97,9 @@ const Post = (props) => {
 
     return (
         <div className="post">
-            <div style={{ display: "flex", alignItems: "center" }}><Avatar size="sm" name={post.user.Name} src={post.user.image} /><Text fontSize="md" style={{ fontWeight: 600, marginLeft: 10 }}>{post.user.Name}</Text></div>
+            <div style={{ display: "flex", alignItems: "center" }}><Avatar style={{cursor:"pointer"}} onClick={()=>{
+              props.history.push({pathname:'/profile',state:{user:post.user}})
+            }} size="sm" name={post.user.Name} src={post.user.image} /><Text fontSize="md" style={{ fontWeight: 600, marginLeft: 10 }}>{post.user.Name}</Text></div>
             <Divider className="divider" />
             {post.Image!==""?<><img class="post_img" src={post.Image}></img>
             <Divider className="divider" />

@@ -29,9 +29,9 @@ export const getPostsAction=()=>{
     })
 }
 
-export const getUserThunk=(data)=>{
+export const getUserThunk=()=>{
     return (async(dispatch)=>{
-        let res=await getUser(data)
+        let res=await getUser()
       
         return(dispatch(singinThunk(res)))
     })
