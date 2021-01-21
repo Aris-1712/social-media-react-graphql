@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/social-media-react-graphql/static/css/main.7862225d.chunk.css",
-    "main.js": "/social-media-react-graphql/static/js/main.b940bcb9.chunk.js",
-    "main.js.map": "/social-media-react-graphql/static/js/main.b940bcb9.chunk.js.map",
-    "runtime-main.js": "/social-media-react-graphql/static/js/runtime-main.42de9ff9.js",
-    "runtime-main.js.map": "/social-media-react-graphql/static/js/runtime-main.42de9ff9.js.map",
-    "static/js/2.2f2ecda6.chunk.js": "/social-media-react-graphql/static/js/2.2f2ecda6.chunk.js",
-    "static/js/2.2f2ecda6.chunk.js.map": "/social-media-react-graphql/static/js/2.2f2ecda6.chunk.js.map",
-    "static/js/3.a2e8127b.chunk.js": "/social-media-react-graphql/static/js/3.a2e8127b.chunk.js",
-    "static/js/3.a2e8127b.chunk.js.map": "/social-media-react-graphql/static/js/3.a2e8127b.chunk.js.map",
-    "index.html": "/social-media-react-graphql/index.html",
-    "static/css/main.7862225d.chunk.css.map": "/social-media-react-graphql/static/css/main.7862225d.chunk.css.map",
-    "static/js/2.2f2ecda6.chunk.js.LICENSE.txt": "/social-media-react-graphql/static/js/2.2f2ecda6.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/social-media-react-graphql/static/media/logo.6ce24c58.svg"
+    "main.css": "/social-media/static/css/main.7862225d.chunk.css",
+    "main.js": "/social-media/static/js/main.d443c8e6.chunk.js",
+    "main.js.map": "/social-media/static/js/main.d443c8e6.chunk.js.map",
+    "runtime-main.js": "/social-media/static/js/runtime-main.7eb468b6.js",
+    "runtime-main.js.map": "/social-media/static/js/runtime-main.7eb468b6.js.map",
+    "static/js/2.7eaad063.chunk.js": "/social-media/static/js/2.7eaad063.chunk.js",
+    "static/js/2.7eaad063.chunk.js.map": "/social-media/static/js/2.7eaad063.chunk.js.map",
+    "static/js/3.a2e8127b.chunk.js": "/social-media/static/js/3.a2e8127b.chunk.js",
+    "static/js/3.a2e8127b.chunk.js.map": "/social-media/static/js/3.a2e8127b.chunk.js.map",
+    "index.html": "/social-media/index.html",
+    "static/css/main.7862225d.chunk.css.map": "/social-media/static/css/main.7862225d.chunk.css.map",
+    "static/js/2.7eaad063.chunk.js.LICENSE.txt": "/social-media/static/js/2.7eaad063.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/social-media/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.42de9ff9.js",
-    "static/js/2.2f2ecda6.chunk.js",
+    "static/js/runtime-main.7eb468b6.js",
+    "static/js/2.7eaad063.chunk.js",
     "static/css/main.7862225d.chunk.css",
-    "static/js/main.b940bcb9.chunk.js"
+    "static/js/main.d443c8e6.chunk.js"
   ]
 }
