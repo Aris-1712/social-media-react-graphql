@@ -249,3 +249,59 @@ export const createPost=(data)=>{
   })
   
 }
+
+
+
+export const getUsers=()=>{
+  return new Promise((resolve,reject)=>{
+    Axios.post(Api, {
+      query: `query{
+        getUsers{
+          Name
+          _id
+          image
+          email
+          followers{
+              Name
+              _id
+              image
+          }
+          following{
+              Name
+              _id
+              image
+          }
+          Age
+          posts{
+              _id
+              Title
+              Body
+              Image
+              Likes{
+                  _id
+                  Name
+                  image
+              }
+              comments{
+                  Text
+                  time
+                  user{
+                      _id
+                      Name
+                      image
+                  }
+              }
+              time
+          }
+
+    }
+      }`
+    }, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token")
+      }
+    }).then((res)=>{
+      resolve(res)
+    })
+  })
+}

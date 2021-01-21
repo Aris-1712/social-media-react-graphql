@@ -1,28 +1,42 @@
 import React, { useEffect, useState } from 'react'
-import { Divider, Input, Text, Button, Avatar } from "@chakra-ui/react"
+import { Divider, Input, Text, Button, Avatar, Skeleton } from "@chakra-ui/react"
 import './Post.css'
 import { withRouter } from 'react-router'
 import PostModel from './PostModel'
 import { connect } from 'react-redux'
 import Axios from 'axios'
 import { Api } from '../../API/Api'
+import * as Actions from '../../Reducer/Actions' 
+
 const Post = (props) => {
     // let post = props.post
-    const [post,setPost]=useState(props.post)
+    const [post,setPost]=useState()
     const [comment,setComment]=useState('')
     const [likeModal,setLikeModal]=useState(false)
     const [like,setLike]=useState(false)
     useEffect(()=>{
-        console.log(props.user)
+      if(typeof post !== 'undefined'){
+        
         if(("data" in props.user && !("error" in props.user.data))){
+          
         post.Likes.forEach(element => {
             if(element._id===props.user.data.data.getUser._id){
+              
                 setLike(true)
+            }else{
+              
+              setLike(false)
             }
         });
+        if(post.Likes.length===0){
+          setLike(false)
+        }
     }
+  }
     },[props.user,post])
-    
+    useEffect(()=>{
+      setPost(props.post)
+    },[])
     const likePost=async()=>{
         let original={...post}
         let temp={...post}
@@ -49,6 +63,8 @@ const Post = (props) => {
             headers: {
               "x-auth-token": localStorage.getItem("x-auth-token")
             }
+          }).then((res)=>{
+            props.update()
           }).catch(err=>{
             setPost({...original})
           })
@@ -89,14 +105,20 @@ const Post = (props) => {
           headers: {
             "x-auth-token": localStorage.getItem("x-auth-token")
           }
+        }).then((res)=>{
+          // props.getPosts()
+          props.update()
         }).catch(err=>{
+          console.log(err)
           setPost({...original})
         })
       
   }
 
     return (
+
         <div className="post">
+          {typeof post === 'undefined'?<Skeleton height="400px" />:<div>
             <div style={{ display: "flex", alignItems: "center" }}><Avatar style={{cursor:"pointer"}} onClick={()=>{
               props.history.push({pathname:'/profile',state:{user:post.user}})
             }} size="sm" name={post.user.Name} src={post.user.image} /><Text fontSize="md" style={{ fontWeight: 600, marginLeft: 10 }}>{post.user.Name}</Text></div>
@@ -128,13 +150,20 @@ const Post = (props) => {
                     </Button>
             </div>
                     <PostModel Likes={post.Likes} open={likeModal} close={()=>{setLikeModal(false)}}></PostModel>
+                    </div>}
         </div>
     )
 
 }
+const mapActionsToProps=(dispatch)=>{
+  return({
+      getPosts:()=>{dispatch(Actions.getPostsAction())}
+  })
+}
 const mapActionsToState=(state)=>{
     return({
-        user:state.user
+        user:state.user,
+        
     })
   }
-export default withRouter(connect(mapActionsToState)(Post))
+export default withRouter(connect(mapActionsToState,mapActionsToProps)(Post))

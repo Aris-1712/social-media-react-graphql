@@ -13,10 +13,11 @@ const Posts = (props) => {
   useEffect(()=>{
     console.log("HERE")
     props.getPosts()
+    props.getUsers()
   },[])
   useEffect(() => {
-
-    setPosts([...props.posts])
+    console.log(props.posts)
+    setPosts([...props.posts].reverse())
       
   }, [props.posts])
 
@@ -29,6 +30,7 @@ const Posts = (props) => {
       }
       temp.push(ele)
     })
+    
     setPosts([...temp])
 
 let data=await postComment(postid,val)
@@ -53,7 +55,7 @@ return (
 }) :posts.map((ele) => {
 
       return (
-        <Post postcomment={onPost} post={ele}>
+        <Post update={()=>props.getPosts()} postcomment={onPost} post={ele}>
           <Comments home={true} comments={ele.comments}></Comments>
         </Post>
       )
@@ -64,7 +66,8 @@ return (
 }
 const mapActionsToProps=(dispatch)=>{
   return({
-      getPosts:()=>{dispatch(Actions.getPostsAction())}
+      getPosts:()=>{dispatch(Actions.getPostsAction())},
+      getUsers:()=>{dispatch(Actions.getUsersThunk())}
   })
 }
 const mapActionsToState=(state)=>{
