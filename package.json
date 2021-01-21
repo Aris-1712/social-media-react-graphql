@@ -1,5 +1,4 @@
   {
-    "homepage": "http://Aris-1712.github.io/social-media-react-graphql",
     "name": "social-media",
     "version": "0.1.0",
     "private": true,
@@ -33,10 +32,8 @@
       "start": "react-scripts start",
       "build": "react-scripts build",
       "test": "react-scripts test",
-      "eject": "react-scripts eject",
-      "predeploy": "npm run build",
-      "deploy": "gh-pages -d build"
-    },
+      "eject": "react-scripts eject"
+},
     "eslintConfig": {
       "extends": [
         "react-app",
