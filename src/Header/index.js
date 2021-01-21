@@ -5,6 +5,7 @@ import { FcSearch } from 'react-icons/fc'
 import './header.css'
 import OutsideClickHandler from 'react-outside-click-handler';
 import { connect } from 'react-redux'
+import _ from 'lodash'
 
 const Header = (props) => {
 const [search,setSearch]=useState('')
