@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/social-media-react-graphql/static/css/main.7862225d.chunk.css",
+    "main.js": "/social-media-react-graphql/static/js/main.b940bcb9.chunk.js",
+    "main.js.map": "/social-media-react-graphql/static/js/main.b940bcb9.chunk.js.map",
+    "runtime-main.js": "/social-media-react-graphql/static/js/runtime-main.42de9ff9.js",
+    "runtime-main.js.map": "/social-media-react-graphql/static/js/runtime-main.42de9ff9.js.map",
+    "static/js/2.2f2ecda6.chunk.js": "/social-media-react-graphql/static/js/2.2f2ecda6.chunk.js",
+    "static/js/2.2f2ecda6.chunk.js.map": "/social-media-react-graphql/static/js/2.2f2ecda6.chunk.js.map",
+    "static/js/3.a2e8127b.chunk.js": "/social-media-react-graphql/static/js/3.a2e8127b.chunk.js",
+    "static/js/3.a2e8127b.chunk.js.map": "/social-media-react-graphql/static/js/3.a2e8127b.chunk.js.map",
+    "index.html": "/social-media-react-graphql/index.html",
+    "static/css/main.7862225d.chunk.css.map": "/social-media-react-graphql/static/css/main.7862225d.chunk.css.map",
+    "static/js/2.2f2ecda6.chunk.js.LICENSE.txt": "/social-media-react-graphql/static/js/2.2f2ecda6.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/social-media-react-graphql/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.42de9ff9.js",
+    "static/js/2.2f2ecda6.chunk.js",
+    "static/css/main.7862225d.chunk.css",
+    "static/js/main.b940bcb9.chunk.js"
+  ]
+}
