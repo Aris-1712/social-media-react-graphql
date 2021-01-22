@@ -134,6 +134,19 @@ export const getPosts=()=>{
                     Name
                     _id
                     image
+                    followers{
+                      _id
+                      Name
+                      image
+                    }
+                    following{
+                      _id
+                      Name
+                      image
+                    }
+                    posts{
+                      _id
+                    }
                   }
                 }
               }

@@ -21,7 +21,7 @@ else{setDrop(true)}
     return (
         <div style={{ height: 70, backgroundColor: "#17b890" }}>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flex: 1, margin: "0px 50px", alignItems: "center", height: "100%" }}>
-                <img style={{ width: 150 }} src={`${process.env.PUBLIC_URL}/Logo/header.png`}></img>
+                <img onClick={()=>{props.history.push('/home')}} style={{ width: 150,cursor:"pointer" }} src={`${process.env.PUBLIC_URL}/Logo/header.png`}></img>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: 250 }}>
                     <div><InputGroup style={{ width: 200, borderColor: "#358e62" }}>
                         <InputLeftElement
@@ -34,7 +34,7 @@ else{setDrop(true)}
                         setDrop(false)
                     }}><div className={!drop?"dropdown-menu-hidden":"dropdown-menu"}>
                         {props.users.filter((ele)=>{
-                            if(ele.Name.includes(search)){
+                            if(ele.Name.toLowerCase().includes(search.toLowerCase())){
                                 return true
                             }
                         }).map((ele)=>{

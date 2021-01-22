@@ -96,8 +96,8 @@ const NewPost = (props) => {
                 <Avatar size="md" name={user.Name} src={user.image} />
                 <div style={{ display: "flex", flexDirection: "column", width: "100%", padding: 10 }}>
                     {image ? <img style={{ marginBottom: 10 }} src={URL.createObjectURL(image)}></img> : null}
-                    <Input onChange={(e)=>{setBody(e.target.value)}} style={{ borderRadius: 15, height: 75, marginLeft: 10 }} placeholder={`What's on your mind, ${user.Name.split(' ')[0]} ?`} size="lg" />
-                    <Input onChange={(e)=>{setTitle(e.target.value)}} placeholder="Enter title" style={{ visibility: titleInput ? "visible" : "hidden", height: titleInput ? 50 : 0, borderRadius: 15, marginLeft: 10, marginTop: 20, transition: "height 0.2s,visibility 0.1s" }}></Input>
+                    <Input value={body} onChange={(e)=>{setBody(e.target.value)}} style={{ borderRadius: 15, height: 75, marginLeft: 10 }} placeholder={`What's on your mind, ${user.Name.split(' ')[0]} ?`} size="lg" />
+                    <Input value={title} onChange={(e)=>{setTitle(e.target.value)}} placeholder="Enter title" style={{ visibility: titleInput ? "visible" : "hidden", height: titleInput ? 50 : 0, borderRadius: 15, marginLeft: 10, marginTop: 20, transition: "height 0.2s,visibility 0.1s" }}></Input>
                 </div>
             </div>
             <Divider></Divider>

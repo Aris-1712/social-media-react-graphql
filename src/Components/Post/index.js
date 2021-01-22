@@ -36,7 +36,7 @@ const Post = (props) => {
     },[props.user,post])
     useEffect(()=>{
       setPost(props.post)
-    },[])
+    },[props.post])
     const likePost=async()=>{
         let original={...post}
         let temp={...post}

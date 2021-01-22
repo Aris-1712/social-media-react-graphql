@@ -17,7 +17,7 @@ const Posts = (props) => {
   },[])
   useEffect(() => {
     console.log(props.posts)
-    setPosts([...props.posts].reverse())
+    setPosts(()=>{return([...props.posts])})
       
   }, [props.posts])
 
@@ -53,13 +53,13 @@ return (
   </Post>
 )}
 }) :posts.map((ele) => {
-
+console.log(ele,"-----------------------")
       return (
         <Post update={()=>props.getPosts()} postcomment={onPost} post={ele}>
           <Comments home={true} comments={ele.comments}></Comments>
         </Post>
       )
-    })}
+    }).reverse()}
     </>
   )
 
