@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Login.css'
-import { Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Button, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react"
 import axios from 'axios'
 import { Api } from '../../API/Api'
 import * as Actions from '../../Reducer/Actions'
@@ -19,7 +19,7 @@ const Login = (props) => {
         <div className="login">
             <div className="login_holder">
                 <img src={process.env.PUBLIC_URL+'/Logo/dark.png'}></img>
-                <h1>Login</h1>
+                <Text fontSize="2xl">Signup</Text>
             <Input placeholder="Enter Email" size="md" onChange={(e) => { setEmail(e.target.value) }} />
             <InputGroup size="md">
                 <Input

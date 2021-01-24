@@ -1,7 +1,9 @@
 .search_box::placeholder{
 color: azure;
 }
-
+.search_box{
+    color:rgb(198, 246, 213)
+}
 .dropdown-menu{
     width: 200px;
     height: auto;

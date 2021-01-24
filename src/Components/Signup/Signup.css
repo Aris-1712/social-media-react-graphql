@@ -20,5 +20,6 @@
 }
 
 .signup_holder img{
-    width: 150px;
+    width: 80px;
+    border-radius: 22px;
 }

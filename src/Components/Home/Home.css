@@ -1,7 +1,9 @@
 .home{
     display: flex;
     flex-direction: row;
-    margin: 20px;
+    /* margin: 20px; */
+    padding: 20px;
+    background-color: white;
 }
 .sec1{
     width:25%

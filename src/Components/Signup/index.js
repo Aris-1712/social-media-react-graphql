@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import './Signup.css'
-import { Avatar, Button, Input, InputGroup, InputRightElement } from "@chakra-ui/react"
+import { Avatar, Button, Input, InputGroup, InputRightElement, Text } from "@chakra-ui/react"
 import axios from 'axios'
 import { Api } from '../../API/Api'
 import { v4 as uuidv4 } from 'uuid';
@@ -53,7 +53,7 @@ const Signup = (props) => {
         <div className="signup">
             <div className="signup_holder">
                 <img src={process.env.PUBLIC_URL + '/Logo/dark.png'}></img>
-                <h1>Signup</h1>
+                <Text fontSize="2xl">Signup</Text>
                 <Avatar onClick={()=>{
                     document.getElementById("profile_pic").click()
                     

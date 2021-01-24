@@ -1,7 +1,7 @@
 import { Avatar, Input, InputGroup, InputLeftElement, Text } from '@chakra-ui/react'
 import React, { useEffect, useState } from 'react'
 import { withRouter } from 'react-router-dom'
-import { FcSearch } from 'react-icons/fc'
+import { ImSearch } from 'react-icons/im'
 import './header.css'
 import OutsideClickHandler from 'react-outside-click-handler';
 import { connect } from 'react-redux'
@@ -19,16 +19,16 @@ else{setDrop(true)}
 
 },[search])
     return (
-        <div style={{ height: 70, backgroundColor: "#17b890" }}>
+        <div style={{ backgroundColor: "#1a202c" }}>
             <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-between", flex: 1, margin: "0px 50px", alignItems: "center", height: "100%" }}>
-                <img onClick={()=>{props.history.push('/home')}} style={{ width: 150,cursor:"pointer" }} src={`${process.env.PUBLIC_URL}/Logo/header.png`}></img>
+                <img onClick={()=>{props.history.push('/home')}} style={{ height: 80,cursor:"pointer" }} src={`${process.env.PUBLIC_URL}/Logo/header.png`}></img>
                 <div style={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-between", width: 250 }}>
-                    <div><InputGroup style={{ width: 200, borderColor: "#358e62" }}>
+                    <div><InputGroup style={{ width: 200, borderColor: "#c6f6d5" }}>
                         <InputLeftElement
                             pointerEvents="none"
-                            children={<FcSearch />}
+                            children={<ImSearch style={{color:"#c6f6d5"}} />}
                         />
-                        <Input onChange={(e)=>{setSearch(e.target.value)}} className="search_box" type="tel" placeholder="Search..." />
+                        <Input  onChange={(e)=>{setSearch(e.target.value)}} className="search_box" type="tel" placeholder="Search..." />
                     </InputGroup>
                     <OutsideClickHandler onOutsideClick={()=>{
                         setDrop(false)
@@ -52,7 +52,7 @@ else{setDrop(true)}
                     <i onClick={() => {
                         localStorage.clear()
                         props.history.push('/Signin')
-                    }} style={{ fontSize: 30, color: "#082D0F" }} class="fa fa-sign-out" aria-hidden="true"></i></div>
+                    }} style={{ fontSize: 30, color: "#c6f6d5" }} class="fa fa-sign-out" aria-hidden="true"></i></div>
             </div>
         </div>
     )
