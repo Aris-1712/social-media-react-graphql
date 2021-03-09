@@ -20,7 +20,7 @@ const Posts = (props) => {
     setPosts(()=>{return([...props.posts])})
       
   }, [props.posts])
-
+  
   const onPost = async(val, postid) => {
     let temp = []
     let tempPosts=[...posts]
@@ -43,15 +43,16 @@ let data=await postComment(postid,val)
  
   return (
     <>
-    {props.profile?posts.map((ele) => {
-      console.log(props.profile,ele._id)
-if(ele.user._id===props.profile){
-  
+    {props.profile ?props.user_posts.map((ele) => {
+      console.log(props.user_posts)
+// if(ele.user._id===props.profile){
+  console.log("HERE")
 return (
   <Post postcomment={onPost} post={ele}>
     <Comments home={true} comments={ele.comments}></Comments>
   </Post>
-)}
+)
+// }
 }) :posts.map((ele) => {
 console.log(ele,"-----------------------")
       return (

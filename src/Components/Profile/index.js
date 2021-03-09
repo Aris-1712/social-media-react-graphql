@@ -7,6 +7,7 @@ import Posts from '../Posts'
 import { Redirect } from 'react-router'
 const Profile = (props) => {
     const [user, setUser] = useState({})
+    console.log(user.posts)
     useEffect(() => {
         if(typeof props.location.state !=='undefined'){
             setUser(props.location.state.user)
@@ -33,7 +34,7 @@ const Profile = (props) => {
                     <div style={{textAlign:"center"}}><Text style={{fontWeight:500}} fontSize="lg">Following</Text><Text style={{color:"#17b890",fontWeight:700}}>{user.following.length}</Text></div>
                     </div>
                     <div style={{marginTop:20}}>
-                    <Posts profile={user._id}></Posts>
+                    <Posts user_posts={user.posts} profile={user._id}></Posts>
                     </div>
                 </div>
                 

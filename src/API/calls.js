@@ -1,6 +1,7 @@
 import { Api } from "./Api"
 import Axios from 'axios'
 import { Redirect } from "react-router"
+import {client} from '../ApolloClient/index'
 export const signin=(data)=>{
     return new Promise((resolve,reject)=>{
         Axios({
@@ -36,7 +37,7 @@ export const getUser=async(email)=>{
   try{
     let data = await Axios.post(Api, {
         query: `mutation{
-            getUser(email:"${email}"){
+            getUser(email:"test"){
                 Name
                 _id
                 image
@@ -52,6 +53,24 @@ export const getUser=async(email)=>{
                     image
                 }
                 Age
+                user{
+                  Name
+                  _id
+                  image
+                  followers{
+                    _id
+                    Name
+                    image
+                  }
+                  following{
+                    _id
+                    Name
+                    image
+                  }
+                  posts{
+                    _id
+                  }
+                }
                 posts{
                     _id
                     Title

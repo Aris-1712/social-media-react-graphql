@@ -17,6 +17,7 @@ const NewPost = (props) => {
     const [image, setImage] = useState(null)
     const [title,setTitle]=useState('')
     const [body,setBody]=useState('')
+    console.log(localStorage.getItem('user_email'))
     useEffect(() => {
         props.getUser()
         
