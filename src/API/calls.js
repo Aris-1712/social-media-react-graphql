@@ -25,6 +25,7 @@ export const signin=(data)=>{
             }
           
         }).catch(err=>{
+          console.log(err)
             alert("Incorrect username or password")
             reject(err)
         })
@@ -35,6 +36,7 @@ export const signin=(data)=>{
 
 export const getUser=async(email)=>{
   try{
+    console.log("HERE@@@")
     let data = await Axios.post(Api, {
         query: `mutation{
             getUser(email:"test"){
@@ -53,24 +55,7 @@ export const getUser=async(email)=>{
                     image
                 }
                 Age
-                user{
-                  Name
-                  _id
-                  image
-                  followers{
-                    _id
-                    Name
-                    image
-                  }
-                  following{
-                    _id
-                    Name
-                    image
-                  }
-                  posts{
-                    _id
-                  }
-                }
+                
                 posts{
                     _id
                     Title
@@ -80,6 +65,12 @@ export const getUser=async(email)=>{
                         _id
                         Name
                         image
+                    }
+                    user{
+                      Name
+                      email
+                      Age
+                      image
                     }
                     comments{
                         Text
@@ -176,9 +167,10 @@ export const getPosts=()=>{
               "x-auth-token": localStorage.getItem("x-auth-token")
             }
           }).then((data)=>{
-           
+           console.log(data)
            resolve([...data.data.data.getPosts])
           }).catch(err=>{
+            console.log(err)
             alert(err)
             reject(err)
           })
@@ -309,6 +301,12 @@ export const getUsers=()=>{
               Title
               Body
               Image
+              user{
+                Name
+                email
+                Age
+                image
+              }
               Likes{
                   _id
                   Name
