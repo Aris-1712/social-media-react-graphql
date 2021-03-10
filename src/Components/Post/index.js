@@ -18,16 +18,28 @@ const Post = (props) => {
       if(typeof post !== 'undefined'){
         
         if(("data" in props.user && !("error" in props.user.data))){
-          
-        post.Likes.forEach(element => {
-            if(element._id===props.user.data.data.getUser._id){
-              
-                setLike(true)
-            }else{
-              
-              setLike(false)
+          let temp=post.Likes.filter(ele=>{
+            if(ele._id===props.user.data.data.getUser._id){
+              return true
             }
-        });
+          })
+          debugger
+          if(temp.length>0){
+            setLike(true)
+          }
+          else{
+            setLike(false)
+          }
+        // post.Likes.forEach(element => {
+        //   debugger
+        //     if(element._id===props.user.data.data.getUser._id){
+              
+        //         setLike(true)
+        //     }else{
+              
+        //       setLike(false)
+        //     }
+        // });
         if(post.Likes.length===0){
           setLike(false)
         }

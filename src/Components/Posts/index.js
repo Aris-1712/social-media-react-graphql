@@ -43,8 +43,8 @@ let data=await postComment(postid,val)
  
   return (
     <>
-    {props.profile ?props.user_posts.map((ele) => {
-      console.log(props.user_posts)
+    {props.profile ?props.posts.map((ele) => {
+      console.log(props.posts)
 // if(ele.user._id===props.profile){
   console.log("HERE")
 return (
