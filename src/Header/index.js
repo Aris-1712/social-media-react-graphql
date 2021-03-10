@@ -38,9 +38,10 @@ else{setDrop(true)}
                                 return true
                             }
                         }).map((ele)=>{
+                            // console.log(ele)
                             return(
                                 <div onClick={()=>{
-                                    props.history.push({pathname:'/profile',state:{user:ele}})
+                                    props.history.push({pathname:'/profile',state:{user:ele.email}})
                                 }} style={{display:"flex",flexDirection:"row",alignItems:"center",padding:10,cursor:"pointer"}}>
                                     <Avatar size="sm" name={ele.Name} src={ele.image} />
                                     <Text style={{marginLeft:10}} fontSize="sm">{ele.Name}</Text>

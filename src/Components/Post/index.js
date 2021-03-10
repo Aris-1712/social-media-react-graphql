@@ -120,7 +120,7 @@ const Post = (props) => {
         <div className="post">
           {typeof post === 'undefined'?<Skeleton height="400px" />:<div>
             <div style={{ display: "flex", alignItems: "center" }}><Avatar style={{cursor:"pointer"}} onClick={()=>{
-              props.history.push({pathname:'/profile',state:{user:post.user}})
+              props.history.push({pathname:'/profile',state:{user:post.user.email}})
             }} size="sm" name={post.user.Name} src={post.user.image} /><Text fontSize="md" style={{ fontWeight: 600, marginLeft: 10 }}>{post.user.Name}</Text></div>
             <Divider className="divider" />
             {post.Image!==""?<><img class="post_img" src={post.Image}></img>

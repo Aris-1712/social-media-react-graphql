@@ -20,12 +20,12 @@ export const signin=(data)=>{
             reject(result.data.errors[0].message)
             } else {
               localStorage.setItem("x-auth-token",result.data.data.signin)
+              localStorage.setItem("user_email",data.email)
               let user=getUser(data.email)
               resolve(user)
             }
           
         }).catch(err=>{
-          console.log(err)
             alert("Incorrect username or password")
             reject(err)
         })
@@ -35,11 +35,11 @@ export const signin=(data)=>{
 }
 
 export const getUser=async(email)=>{
+  
   try{
-    console.log("HERE@@@")
     let data = await Axios.post(Api, {
         query: `mutation{
-            getUser(email:"test"){
+            getUser(email:"${email}"){
                 Name
                 _id
                 image
@@ -61,16 +61,16 @@ export const getUser=async(email)=>{
                     Title
                     Body
                     Image
+                    user{
+                      Name
+                      image
+                      _id
+                      
+                    }
                     Likes{
                         _id
                         Name
                         image
-                    }
-                    user{
-                      Name
-                      email
-                      Age
-                      image
                     }
                     comments{
                         Text
@@ -94,11 +94,11 @@ export const getUser=async(email)=>{
       }
       )
       console.log(data)
-      localStorage.setItem("user_email",email)
+      // localStorage.setItem("user_email",email)
       return data
     }catch(err){
-      
-      <Redirect path='/Signin'></Redirect>
+        console.log(err)
+      // <Redirect path='/Signin'></Redirect>
     }
 }
 
@@ -122,6 +122,7 @@ export const getPosts=()=>{
                 user{
                   Name
                   _id
+                  email
                   image
                   followers{
                     _id
@@ -167,10 +168,9 @@ export const getPosts=()=>{
               "x-auth-token": localStorage.getItem("x-auth-token")
             }
           }).then((data)=>{
-           console.log(data)
+           
            resolve([...data.data.data.getPosts])
           }).catch(err=>{
-            console.log(err)
             alert(err)
             reject(err)
           })
@@ -196,6 +196,8 @@ export const postComment=(postid,val)=>{
             }
           }).then((data)=>{
             resolve(data)
+        }).catch(err=>{
+          alert(err)
         })
     })
     
@@ -240,6 +242,7 @@ export const getPost=(id)=>{
           }).then((data)=>{
               resolve(data.data.data.getPost)
           }).catch(err=>{
+            alert(err)
               reject(err)
           })
     })
@@ -269,6 +272,8 @@ export const createPost=(data)=>{
           }
         }).then((data)=>{
           resolve(data)
+      }).catch((err)=>{
+        alert(err)
       })
   })
   
@@ -301,12 +306,6 @@ export const getUsers=()=>{
               Title
               Body
               Image
-              user{
-                Name
-                email
-                Age
-                image
-              }
               Likes{
                   _id
                   Name
@@ -332,6 +331,8 @@ export const getUsers=()=>{
       }
     }).then((res)=>{
       resolve(res)
+    }).catch(err=>{
+      alert(err)
     })
   })
 }

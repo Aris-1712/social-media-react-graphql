@@ -5,21 +5,30 @@ import * as Actions from '../../Reducer/Actions'
 import {FaUserPlus} from 'react-icons/fa'
 import Posts from '../Posts'
 import { Redirect } from 'react-router'
+import { getUser} from '../../API/calls'
 const Profile = (props) => {
     const [user, setUser] = useState({})
-    console.log(user.posts)
+    console.log(props.location.state)
     useEffect(() => {
+        const getuserFunc=async()=>{
+            console.log(props.location.state.user)
+            let res=await getUser(props.location.state.user)
+            console.log(res.data.data.getUser)
+            setUser(res.data.data.getUser)
+        }
         if(typeof props.location.state !=='undefined'){
-            setUser(props.location.state.user)
+            getuserFunc()
+            // setUser(props.location.state.user)
         }
         
     }, [props.location])
     if(typeof props.location.state ==='undefined'){
         return(<Redirect to='/home'></Redirect>)
     }
+    console.log(user)
     return (
         <div>
-            {/* "data" in props.user &&  */Object.keys(user).length !== 0 ?
+            {Object.keys(user).length !== 0 ?
                 <div style={{ width: "50%", margin: "100px auto" }}>
                     <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
                         <div style={{ border: "3px solid #17b890", borderRadius: 100, padding: 10 }}><Avatar size="2xl" name={user.Name} src={user.image}></Avatar></div>
@@ -50,7 +59,7 @@ const mapStateToProps = (state) => {
 }
 const mapActionToProps = (dispatch) => {
     return ({
-        getUser: () => { dispatch(Actions.getUserThunk()) }
+        getUser: (email) => { dispatch(Actions.getUserThunk(email)) }
     })
 }
 export default connect(mapStateToProps, mapActionToProps)(Profile)
