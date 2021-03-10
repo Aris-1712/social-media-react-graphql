@@ -48,7 +48,7 @@ let data=await postComment(postid,val)
 // if(ele.user._id===props.profile){
   console.log("HERE")
 return (
-  <Post postcomment={onPost} post={ele}>
+  <Post update={()=>props.getPosts()} postcomment={onPost} post={ele}>
     <Comments home={true} comments={ele.comments}></Comments>
   </Post>
 )

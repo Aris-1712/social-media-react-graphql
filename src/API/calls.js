@@ -217,6 +217,7 @@ export const getPost=(id)=>{
                             Name
                             _id
                             image
+                            email
                           }
                           comments{
                             time
@@ -225,6 +226,7 @@ export const getPost=(id)=>{
                               image
                               Name
                               _id
+                              email
                             }
                           }
                           Likes{

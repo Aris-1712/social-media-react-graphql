@@ -11,7 +11,7 @@ const Profile = (props) => {
     console.log(props.location.state)
     useEffect(() => {
         const getuserFunc=async()=>{
-            console.log(props.location.state.user)
+            console.log(props,props.location.state.user)
             let res=await getUser(props.location.state.user)
             console.log(res.data.data.getUser)
             setUser(res.data.data.getUser)

@@ -23,7 +23,7 @@ const Post = (props) => {
               return true
             }
           })
-          debugger
+          // debugger
           if(temp.length>0){
             setLike(true)
           }
@@ -49,7 +49,9 @@ const Post = (props) => {
     useEffect(()=>{
       setPost(props.post)
     },[props.post])
+
     const likePost=async()=>{
+      debugger
         let original={...post}
         let temp={...post}
         temp.Likes=[...temp.Likes,{_id:props.user.data.data.getUser._id,image:props.user.data.data.getUser.image,Name:props.user.data.data.getUser.Name}]
@@ -78,6 +80,7 @@ const Post = (props) => {
           }).then((res)=>{
             props.update()
           }).catch(err=>{
+            console.log("--------------------------------------",err)
             setPost({...original})
           })
         
@@ -142,9 +145,9 @@ const Post = (props) => {
             <Text fontSize="sm">{post.Body}</Text>
             <Divider className="divider" />
             <div>{like?<i onClick={dislikePost} class="fa fa-thumbs-up" aria-hidden="true" style={{ color: "#e64949", fontSize: 20, marginRight: 10, cursor:"pointer" }}></i>:<i onClick={likePost} class="fa fa-thumbs-o-up" aria-hidden="true" style={{ color: "#e64949", fontSize: 20, marginRight: 10,cursor:"pointer" }}></i>}<Text className="like_text" onClick={()=>{setLikeModal(true)}}>{`${post.Likes ? post.Likes.length : 0} Likes`}</Text><i style={{ color: "#082d0f", fontSize: 20, marginLeft: 20, marginRight: 10 }} class="fa fa-comments" aria-hidden="true"></i><Text onClick={() => {
-                if (props.location.pathname === '/home') {
+                // if (props.location.pathname === '/home') {
                     props.history.push(`/post/${post._id}`)
-                }
+                // }
             }} className="comment_text">{`${post.comments ? post.comments.length : 0} Comments`}</Text></div>
             <Divider className="divider" />
             {props.children !== undefined ?
