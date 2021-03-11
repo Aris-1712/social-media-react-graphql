@@ -25,7 +25,7 @@ const Profile = (props) => {
     if(typeof props.location.state ==='undefined'){
         return(<Redirect to='/home'></Redirect>)
     }
-    console.log(user)
+    console.log(user.posts)
     return (
         <div>
             {Object.keys(user).length !== 0 ?
@@ -43,7 +43,7 @@ const Profile = (props) => {
                     <div style={{textAlign:"center"}}><Text style={{fontWeight:500}} fontSize="lg">Following</Text><Text style={{color:"#17b890",fontWeight:700}}>{user.following.length}</Text></div>
                     </div>
                     <div style={{marginTop:20}}>
-                    <Posts posts={user.posts} profile={user._id}></Posts>
+                    <Posts profilePosts={[...user.posts]} profile={user._id}></Posts>
                     </div>
                 </div>
                 

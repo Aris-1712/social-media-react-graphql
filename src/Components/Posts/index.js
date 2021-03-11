@@ -11,16 +11,25 @@ const Posts = (props) => {
   
   const [posts, setPosts] = useState([])
   useEffect(()=>{
-    console.log("HERE")
-    props.getPosts()
-    props.getUsers()
+    if(!props.profile){
+      console.log("HERE")
+      props.getPosts()
+      props.getUsers()
+    }
+    
   },[])
   useEffect(() => {
-    console.log(props.posts)
+
+    console.log(props,'----')
     setPosts(()=>{return([...props.posts])})
       
   }, [props.posts])
-  
+  useEffect(()=>{
+    if(props.profilePosts){
+      setPosts([...props.profilePosts])
+    }
+    
+  },[props.profilePosts])
   const onPost = async(val, postid) => {
     let temp = []
     let tempPosts=[...posts]
@@ -43,7 +52,7 @@ let data=await postComment(postid,val)
  
   return (
     <>
-    {props.profile ?props.posts.map((ele) => {
+    {props.profile ?posts.map((ele) => {
       console.log(props.posts)
 // if(ele.user._id===props.profile){
   console.log("HERE")

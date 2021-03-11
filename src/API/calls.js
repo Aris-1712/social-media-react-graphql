@@ -1,44 +1,42 @@
 import { Api } from "./Api"
 import Axios from 'axios'
-import { Redirect } from "react-router"
-import {client} from '../ApolloClient/index'
-export const signin=(data)=>{
-    return new Promise((resolve,reject)=>{
-        Axios({
-            url: Api,
-            method: 'post',
-            data: {
-                query: `
+export const signin = (data) => {
+  return new Promise((resolve, reject) => {
+    Axios({
+      url: Api,
+      method: 'post',
+      data: {
+        query: `
     mutation{
         signin(email:"${data.email}",pass:"${data.password}")
         }
       `
-            }
-        }).then((result) => {
-            if ("errors" in result.data) {
-            alert("Incorrect username or password")
-            reject(result.data.errors[0].message)
-            } else {
-              localStorage.setItem("x-auth-token",result.data.data.signin)
-              localStorage.setItem("user_email",data.email)
-              let user=getUser(data.email)
-              resolve(user)
-            }
-          
-        }).catch(err=>{
-            alert("Incorrect username or password")
-            reject(err)
-        })
+      }
+    }).then((result) => {
+      if ("errors" in result.data) {
+        alert("Incorrect username or password")
+        reject(result.data.errors[0].message)
+      } else {
+        localStorage.setItem("x-auth-token", result.data.data.signin)
+        localStorage.setItem("user_email", data.email)
+        let user = getUser(data.email)
+        resolve(user)
+      }
+
+    }).catch(err => {
+      alert("Incorrect username or password")
+      reject(err)
     })
-    
+  })
+
 
 }
 
-export const getUser=async(email)=>{
-  
-  try{
+export const getUser = async (email) => {
+
+  try {
     let data = await Axios.post(Api, {
-        query: `mutation{
+      query: `mutation{
             getUser(email:"${email}"){
                 Name
                 _id
@@ -86,28 +84,27 @@ export const getUser=async(email)=>{
 
           }
 }`
-      }
+    }
       , {
         headers: {
           "x-auth-token": localStorage.getItem("x-auth-token")
         }
       }
-      )
-      console.log(data)
-      // localStorage.setItem("user_email",email)
-      return data
-    }catch(err){
-        console.log(err)
-      // <Redirect path='/Signin'></Redirect>
-    }
+    )
+    console.log(data.data.data.getUser)
+    localStorage.setItem("user_details", JSON.stringify(data.data.data.getUser))
+    return data
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 
-export const getPosts=()=>{
-   
-       return new Promise((resolve,reject)=>{
-        let data = Axios.post(Api, {
-            query: `
+export const getPosts = () => {
+
+  return new Promise((resolve, reject) => {
+    let data = Axios.post(Api, {
+      query: `
           query{
               getPosts{
                 Title
@@ -163,24 +160,24 @@ export const getPosts=()=>{
               }
             }
   `
-          }, {
-            headers: {
-              "x-auth-token": localStorage.getItem("x-auth-token")
-            }
-          }).then((data)=>{
-           
-           resolve([...data.data.data.getPosts])
-          }).catch(err=>{
-            alert(err)
-            reject(err)
-          })
-       })  
+    }, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token")
+      }
+    }).then((data) => {
+
+      resolve([...data.data.data.getPosts])
+    }).catch(err => {
+      alert(err)
+      reject(err)
+    })
+  })
 }
 
-export const postComment=(postid,val)=>{
-    return new Promise((resolve,reject)=>{
-         Axios.post(Api, {
-            query: `
+export const postComment = (postid, val) => {
+  return new Promise((resolve, reject) => {
+    Axios.post(Api, {
+      query: `
             mutation{
               createComment(pid:"${postid}",text:"${val}",time:"${new Date().toISOString()}"){
                 Text
@@ -190,24 +187,24 @@ export const postComment=(postid,val)=>{
               }
             }
       `
-          }, {
-            headers: {
-              "x-auth-token": localStorage.getItem("x-auth-token")
-            }
-          }).then((data)=>{
-            resolve(data)
-        }).catch(err=>{
-          alert(err)
-        })
+    }, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token")
+      }
+    }).then((data) => {
+      resolve(data)
+    }).catch(err => {
+      alert(err)
     })
-    
+  })
+
 }
 
 
-export const getPost=(id)=>{
-    return new Promise((resolve,reject)=>{
-        Axios.post(Api, {
-            query: `mutation{
+export const getPost = (id) => {
+  return new Promise((resolve, reject) => {
+    Axios.post(Api, {
+      query: `mutation{
                         getPost(id:"${id}"){
                           Title
                           _id
@@ -237,24 +234,24 @@ export const getPost=(id)=>{
                           
                         }
                       }`
-          }, {
-            headers: {
-              "x-auth-token": localStorage.getItem("x-auth-token")
-            }
-          }).then((data)=>{
-              resolve(data.data.data.getPost)
-          }).catch(err=>{
-            alert(err)
-              reject(err)
-          })
+    }, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token")
+      }
+    }).then((data) => {
+      resolve(data.data.data.getPost)
+    }).catch(err => {
+      alert(err)
+      reject(err)
     })
+  })
 
 }
 
-export const createPost=(data)=>{
-  return new Promise((resolve,reject)=>{
-       Axios.post(Api, {
-          query: `
+export const createPost = (data) => {
+  return new Promise((resolve, reject) => {
+    Axios.post(Api, {
+      query: `
           mutation{
             createPost(title:"${data.title}",body:"${data.body}",Image:"${data.Image}",time:"${data.time}"){
               Title
@@ -268,23 +265,23 @@ export const createPost=(data)=>{
             }
           }
     `
-        }, {
-          headers: {
-            "x-auth-token": localStorage.getItem("x-auth-token")
-          }
-        }).then((data)=>{
-          resolve(data)
-      }).catch((err)=>{
-        alert(err)
-      })
+    }, {
+      headers: {
+        "x-auth-token": localStorage.getItem("x-auth-token")
+      }
+    }).then((data) => {
+      resolve(data)
+    }).catch((err) => {
+      alert(err)
+    })
   })
-  
+
 }
 
 
 
-export const getUsers=()=>{
-  return new Promise((resolve,reject)=>{
+export const getUsers = () => {
+  return new Promise((resolve, reject) => {
     Axios.post(Api, {
       query: `query{
         getUsers{
@@ -331,9 +328,9 @@ export const getUsers=()=>{
       headers: {
         "x-auth-token": localStorage.getItem("x-auth-token")
       }
-    }).then((res)=>{
+    }).then((res) => {
       resolve(res)
-    }).catch(err=>{
+    }).catch(err => {
       alert(err)
     })
   })
