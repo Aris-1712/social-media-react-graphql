@@ -13,13 +13,16 @@ const Post = (props) => {
   const [comment, setComment] = useState('')
   const [likeModal, setLikeModal] = useState(false)
   const [like, setLike] = useState(false)
+  const user=JSON.parse(localStorage.getItem("user_details"))
   useEffect(() => {
 
     if (typeof post !== 'undefined') {
-
-      if (("data" in props.user && !("error" in props.user.data))) {
+      console.log(props.user)
+      if (localStorage.getItem("user_details")) {
+        
+        // console.log(props.user.data.data.getUser._id)
         let temp = post.Likes.filter(ele => {
-          if (ele._id === props.user.data.data.getUser._id) {
+          if (ele._id === user._id) {
             return true
           }
         })
@@ -42,7 +45,7 @@ const Post = (props) => {
   const likePost = async () => {
     let original = { ...post }
     let temp = { ...post }
-    temp.Likes = [...temp.Likes, { _id: props.user.data.data.getUser._id, image: props.user.data.data.getUser.image, Name: props.user.data.data.getUser.Name }]
+    temp.Likes = [...temp.Likes, { _id: user._id, image: user.image, Name:user.Name }]
     setPost({ ...temp })
     Axios.post(Api, {
       query: `
@@ -66,7 +69,7 @@ const Post = (props) => {
         "x-auth-token": localStorage.getItem("x-auth-token")
       }
     }).then((res) => {
-      props.update()
+      // props.update()
     }).catch(err => {
       console.log("--", err)
       setPost({ ...original })
@@ -78,7 +81,7 @@ const Post = (props) => {
     let original = { ...post }
     let temp = { ...post }
     let likearray = temp.Likes.filter((ele) => {
-      if (ele._id === props.user.data.data.getUser._id) {
+      if (ele._id === user._id) {
         return false
       }
       else {

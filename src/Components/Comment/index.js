@@ -9,7 +9,7 @@ const Comment = (props) => {
     if (comment) {
         return (
             <div className="comment">
-                <Avatar style={{ cursor: "pointer" }} onClick={() => { props.history.push({ pathname: "/profile", state: { user: comment.user } }) }} size="sm" name={comment.user.Name} src={comment.user.image} />
+                <Avatar style={{ cursor: "pointer" }} onClick={() => { props.history.push({ pathname: "/profile", state: { user: comment.user.email } }) }} size="sm" name={comment.user.Name} src={comment.user.image} />
                 <div className="comment_sec">
                     <Text fontSize="sm" style={{ fontWeight: 600 }}>{comment.user.Name}</Text>
                     <Text fontSize="sm" style={{ wordBreak: "break-all" }}>{comment.Text}</Text>

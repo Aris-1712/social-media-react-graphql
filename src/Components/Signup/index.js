@@ -52,7 +52,7 @@ const Signup = (props) => {
     return (
         <div className="signup">
             <div className="signup_holder">
-                <img src={process.env.PUBLIC_URL + '/Logo/dark.png'}></img>
+                <img class="logo" src={process.env.PUBLIC_URL + '/Logo/dark.png'}></img>
                 <Text fontSize="2xl">Signup</Text>
                 <Avatar onClick={()=>{
                     document.getElementById("profile_pic").click()

@@ -19,7 +19,7 @@ export const signin = (data) => {
       } else {
         localStorage.setItem("x-auth-token", result.data.data.signin)
         localStorage.setItem("user_email", data.email)
-        let user = getUser(data.email)
+        let user = getUserSignin(data.email)
         resolve(user)
       }
 
@@ -77,6 +77,75 @@ export const getUser = async (email) => {
                             _id
                             Name
                             image
+                            email
+                        }
+                    }
+                    time
+                }
+
+          }
+}`
+    }
+      , {
+        headers: {
+          "x-auth-token": localStorage.getItem("x-auth-token")
+        }
+      }
+    ) 
+    console.log(data.data.data.getUser)
+    // localStorage.setItem("user_details", JSON.stringify(data.data.data.getUser))
+    return data
+  } catch (err) {
+    console.log(err)
+  }
+}
+
+export const getUserSignin = async (email) => {
+
+  try {
+    let data = await Axios.post(Api, {
+      query: `mutation{
+            getUser(email:"${email}"){
+                Name
+                _id
+                image
+                email
+                followers{
+                    Name
+                    _id
+                    image
+                }
+                following{
+                    Name
+                    _id
+                    image
+                }
+                Age
+                
+                posts{
+                    _id
+                    Title
+                    Body
+                    Image
+                    user{
+                      Name
+                      image
+                      _id
+                      
+                    }
+                    Likes{
+                        _id
+                        Name
+                        image
+                    }
+                    comments{
+                        Text
+                        time
+                        user{
+                            _id
+                            Name
+                            image
+                            email
                         }
                     }
                     time
@@ -98,7 +167,6 @@ export const getUser = async (email) => {
     console.log(err)
   }
 }
-
 
 export const getPosts = () => {
 
@@ -141,6 +209,7 @@ export const getPosts = () => {
                   user{
                     Name
                     _id
+                    email
                     image
                     followers{
                       _id
@@ -317,6 +386,7 @@ export const getUsers = () => {
                       _id
                       Name
                       image
+                      email
                   }
               }
               time
