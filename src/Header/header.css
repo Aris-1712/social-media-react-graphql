@@ -7,7 +7,7 @@ color: azure;
 .dropdown-menu{
     width: 200px;
     height: auto;
-    background-color:rgb(197 226 219);
+    background-color:rgb(176 189 186 / 84%);
     position: absolute;
     margin-top: 10px;
     display:flex;
@@ -17,4 +17,55 @@ color: azure;
 
 .dropdown-menu-hidden{
     display: none;
+}
+
+.HeaderHolder{
+    background-color: rgb(26, 32, 44);
+}
+.HeaderHolderInner{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex: 1 1 0%;
+    margin: 0px 50px;
+    align-items: center;
+    height: 100%;
+}
+@media only screen and (max-width: 600px) {
+    .HeaderHolderInner {
+        margin: 0px 5px;
+    }
+  }
+.HeaderHolderInner img{
+    height: 80px;
+    cursor: pointer;
+}
+.HeaderSearchHolder{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 250px;
+}
+
+.HeaderInputBox{
+    width: 200px !important;
+    border-color: rgb(198, 246, 213);
+}
+.searchUser{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+    cursor: pointer;
+}
+.searchUser img{
+    height: 33px;
+}
+.searchUser p{
+    margin-left: 10px;
+}
+.signout{
+    font-size: 30px;
+    color: rgb(198, 246, 213);
 }

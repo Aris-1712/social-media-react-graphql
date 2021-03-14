@@ -2,7 +2,21 @@
 height: auto;
     border-radius: 5px;
     border:1px solid rgb(197 226 219);
-    margin-bottom: 10px;}
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+.postContent{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px;
+}
+.postText{
+    border-radius: 15px !important;
+    height: 75px !important;
+    margin-left: 10px;
+}
 .newpost{
     
     display: flex;
@@ -10,4 +24,11 @@ height: auto;
     padding: 10px;
     align-items: center;
     
+}
+.buttonsHolder{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin-top: 10px;
+    margin-bottom: 15px;
 }

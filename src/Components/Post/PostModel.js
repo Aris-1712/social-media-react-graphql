@@ -24,12 +24,12 @@ return(
         <ModalCloseButton />
         <Divider></Divider>
         <ModalBody>
-          <div style={{display:"flex",flexDirection:"column"}}>
+          <div className="likeModelHolder">
               {props.Likes.map((ele)=>{
                   return(
-                      <div style={{display:"flex",flexDirection:'row',marginBottom:15,marginTop:15}}>
+                      <div className="likesHolder" >
                           <Avatar size="sm" name={ele.Name} src={ele.image} />
-                          <Text fontSize="md" style={{ fontWeight: 600, marginLeft: 10 }}>{ele.Name}</Text>
+                          <Text fontSize="md" >{ele.Name}</Text>
                       </div>
                   )
               })}

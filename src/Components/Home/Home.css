@@ -1,16 +1,25 @@
 .home{
     display: flex;
     flex-direction: row;
-    /* margin: 20px; */
     padding: 20px;
     background-color: white;
+    /* margin:0 20%; */
+    /* text-align: center; */
 }
 .sec1{
     width:25%
 }
 .sec2{
-    width: 70%;
+    /* max-width: 700px; */
+    margin:0px auto;
+    max-width: 900px
 }
 .sec3{
     width: 25%;
 }
+
+@media only screen and (max-width: 600px) {
+    .sec2 {
+        min-width: 300px
+    }
+  }

@@ -1,0 +1,29 @@
+.ProfileHolder{
+    width: 50%;
+    margin:100px auto;
+}
+.ProfileImageHolder{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ProfileDetailHolder{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    border: 1px solid rgb(197, 226, 219);
+    padding: 20px;
+    border-radius: 20px;
+}
+.ProfileDetailHolder div{
+    text-align: center;
+}
+.ProfileDetailHolder div p{
+    font-weight: 500;
+}
+.ProfileCount{
+    color: rgb(23, 184, 144);
+    font-weight: 700 !important;
+}

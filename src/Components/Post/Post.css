@@ -28,3 +28,43 @@
 .comment_text:hover{
     text-decoration: underline;
 }
+.avatarHolder{
+    display: flex;
+    align-items: center;
+}
+
+.avatarHolder p{
+    font-weight: 600;
+    margin-left: 10px;
+}
+.likeIcon{
+    color: #e64949;
+    font-size: 20px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+.commentIcon{
+    color:#082d0f;
+    font-size: 20px;
+    margin-left:20px;
+    margin-right: 10px ;
+}
+.commentText{
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+    justify-content: space-between;
+}
+.likeModelHolder{
+    display: flex;
+    flex-direction: column;
+}
+.likesHolder{
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0px;
+}
+.likesHolder p{
+    font-weight: 600;
+    margin-left: 10px;
+}

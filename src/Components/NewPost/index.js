@@ -92,17 +92,17 @@ const NewPost = (props) => {
         setBody('')
     }
     return (<div>{
-        Object.keys(user).length !== 0 ? <div className="newPostHolder" style={{ display: "flex", flexDirection: "column" }}>
+        Object.keys(user).length !== 0 ? <div className="newPostHolder" >
             <div className="newpost">
                 <Avatar size="md" name={user.Name} src={user.image} />
-                <div style={{ display: "flex", flexDirection: "column", width: "100%", padding: 10 }}>
+                <div className="postContent" >
                     {image ? <img style={{ marginBottom: 10 }} src={URL.createObjectURL(image)}></img> : null}
-                    <Input value={body} onChange={(e)=>{setBody(e.target.value)}} style={{ borderRadius: 15, height: 75, marginLeft: 10 }} placeholder={`What's on your mind, ${user.Name.split(' ')[0]} ?`} size="lg" />
+                    <Input className="postText" value={body} onChange={(e)=>{setBody(e.target.value)}}  placeholder={`What's on your mind, ${user.Name.split(' ')[0]} ?`} size="lg" />
                     <Input value={title} onChange={(e)=>{setTitle(e.target.value)}} placeholder="Enter title" style={{ visibility: titleInput ? "visible" : "hidden", height: titleInput ? 50 : 0, borderRadius: 15, marginLeft: 10, marginTop: 20, transition: "height 0.2s,visibility 0.1s" }}></Input>
                 </div>
             </div>
             <Divider></Divider>
-            <div style={{ display: "flex", flexDirection: "row", justifyContent: "space-evenly", marginTop: 15, marginBottom: 15 }}>
+            <div className="buttonsHolder" >
                 <Button onClick={() => { setTitleInput(!titleInput) }} variant="ghost" colorScheme="green" leftIcon={<MdTitle />}>
                     Add Title
                 </Button>

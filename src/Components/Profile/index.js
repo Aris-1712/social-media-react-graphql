@@ -8,6 +8,7 @@ import { Redirect } from 'react-router'
 import { getUser} from '../../API/calls'
 import Axios from 'axios'
 import {Api} from '../../API/Api'
+import './Profile.css'
 const Profile = (props) => {
     const loggedin_user=JSON.parse(localStorage.getItem("user_details"))
     const [user, setUser] = useState({})
@@ -84,8 +85,8 @@ const Profile = (props) => {
     return (
         <div>
             {Object.keys(user).length !== 0 ?
-                <div style={{ width: "50%", margin: "100px auto" }}>
-                    <div style={{ display: "flex", justifyContent: "center", alignItems: "center", flexDirection: "column" }}>
+                <div className="ProfileHolder">
+                    <div className="ProfileImageHolder" >
                         <div style={{ border: "3px solid #17b890", borderRadius: 100, padding: 10 }}><Avatar size="2xl" name={user.Name} src={user.image}></Avatar></div>
                         <Text style={{ fontWeight: 500 }} fontSize="4xl">{user.Name}</Text>
                         {!followCheck?<Button onClick={()=>{follow(user._id)}} style={{marginTop:10,fontSize:15}} leftIcon={<FaUserPlus />} colorScheme="blue" variant="outline">
@@ -95,10 +96,10 @@ const Profile = (props) => {
                             Unfollow
                         </Button>}
                     </div>
-                    <div style={{display:"flex",justifyContent:"space-evenly",marginTop:50,marginBottom:50,border:"1px solid rgb(197 226 219)",padding:20,borderRadius:20}}>
-                    <div style={{textAlign:"center"}}><Text style={{fontWeight:500}} fontSize="lg">Total Posts</Text><Text style={{color:"#17b890",fontWeight:700}}>{user.posts.length}</Text></div>
-                    <div style={{textAlign:"center"}}><Text style={{fontWeight:500}} fontSize="lg">Followers</Text><Text style={{color:"#17b890",fontWeight:700}}>{user.followers.length}</Text></div>
-                    <div style={{textAlign:"center"}}><Text style={{fontWeight:500}} fontSize="lg">Following</Text><Text style={{color:"#17b890",fontWeight:700}}>{user.following.length}</Text></div>
+                    <div className="ProfileDetailHolder">
+                    <div ><Text  fontSize="lg">Total Posts</Text><Text className="ProfileCount" >{user.posts.length}</Text></div>
+                    <div ><Text  fontSize="lg">Followers</Text><Text className="ProfileCount" >{user.followers.length}</Text></div>
+                    <div ><Text  fontSize="lg">Following</Text><Text className="ProfileCount" >{user.following.length}</Text></div>
                     </div>
                     <div style={{marginTop:20}}>
                     <Posts profilePosts={[...user.posts]} profile={user._id}></Posts>
