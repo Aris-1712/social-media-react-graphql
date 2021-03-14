@@ -1,7 +1,13 @@
 .ProfileHolder{
-    width: 50%;
+    max-width: 900px;
     margin:100px auto;
+    padding: 20px;
 }
+@media only screen and (max-width: 600px) {
+    .ProfileHolder {
+        min-width: 300px
+    }
+  }
 .ProfileImageHolder{
     display: flex;
     justify-content: center;

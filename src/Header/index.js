@@ -28,7 +28,7 @@ else{setDrop(true)}
                             pointerEvents="none"
                             children={<ImSearch style={{color:"#c6f6d5"}} />}
                         />
-                        <Input  onChange={(e)=>{setSearch(e.target.value)}} className="search_box" type="tel" placeholder="Search..." />
+                        <Input  onChange={(e)=>{setSearch(e.target.value)}} className="search_box"  placeholder="Search..." />
                     </InputGroup>
                     <OutsideClickHandler onOutsideClick={()=>{
                         setDrop(false)
