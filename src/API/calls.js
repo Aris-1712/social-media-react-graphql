@@ -33,7 +33,7 @@ export const signin = (data) => {
 }
 
 export const getUser = async (email) => {
-
+  console.log(email)
   try {
     let data = await Axios.post(Api, {
       query: `mutation{

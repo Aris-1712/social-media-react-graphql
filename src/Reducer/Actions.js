@@ -24,7 +24,6 @@ const getPostThunk = (payLoad) => {
 export const getPostsAction = () => {
     return (async (dispatch) => {
         let res = await getPosts()
-
         return (dispatch(getPostThunk([...res])))
     })
 }
