@@ -8,13 +8,16 @@ import { Redirect } from 'react-router'
 import { getUser} from '../../API/calls'
 import Axios from 'axios'
 import {Api} from '../../API/Api'
+import { useToast } from "@chakra-ui/react"
 import './Profile.css'
 const Profile = (props) => {
+    const toast = useToast()
     const loggedin_user=JSON.parse(localStorage.getItem("user_details"))
     const [user, setUser] = useState({})
     const [followCheck,setFollowCheck]=useState(false)
     console.log(props.location.state)
     useEffect(() => {
+        setUser({})
         const getuserFunc=async()=>{
             console.log(props,props.location.state.user)
             let res=await getUser(props.location.state.user)
@@ -39,6 +42,10 @@ const Profile = (props) => {
     console.log(user.posts)
     
     const follow=async(id)=>{
+        let temp={...user}
+        temp.followers=[...temp.followers,{Name:loggedin_user.Name,_id:loggedin_user._id,image:loggedin_user.image}]
+        setUser({...temp})
+        setFollowCheck(true)
         let data = await Axios.post(Api, {
             query: `mutation{
                 follow(id:"${id}")
@@ -50,13 +57,29 @@ const Profile = (props) => {
               }
             }
           )
-          console.log(data)
-          let temp={...user}
-          temp.followers=[...temp.followers,{Name:loggedin_user.Name,_id:loggedin_user._id,image:loggedin_user.image}]
-          setUser({...temp})
-          setFollowCheck(true)
+          if(data.status===200){
+            toast({
+                title: "You are now following this user.",
+                
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              })
+          }
+         
     }
     const unfollow=async(id)=>{
+        let temp={...user}
+          let index
+          temp.followers.map((ele,ind)=>{
+              if(ele._id===loggedin_user._id){
+                  index=ind
+              }
+          })
+          temp.followers.splice(index,1)
+        //   temp.following=[...temp.following,loggedin_user._id]
+          setUser({...temp})
+          setFollowCheck(false)
         let data = await Axios.post(Api, {
             query: `mutation{
                 unfollow(id:"${id}")
@@ -68,19 +91,16 @@ const Profile = (props) => {
               }
             }
           )
-          console.log(data)
-          let temp={...user}
-          let index
-          debugger
-          temp.followers.map((ele,ind)=>{
-              if(ele._id===loggedin_user._id){
-                  index=ind
-              }
-          })
-          temp.followers.splice(index,1)
-        //   temp.following=[...temp.following,loggedin_user._id]
-          setUser({...temp})
-          setFollowCheck(false)
+          if(data.status===200){
+            toast({
+                title: "You are not following this user anymore.",
+                
+                status: "success",
+                duration: 9000,
+                isClosable: true,
+              })
+          }
+          
     }
     return (
         <div>
@@ -89,12 +109,12 @@ const Profile = (props) => {
                     <div className="ProfileImageHolder" >
                         <div style={{ border: "3px solid #17b890", borderRadius: 100, padding: 10 }}><Avatar size="2xl" name={user.Name} src={user.image}></Avatar></div>
                         <Text style={{ fontWeight: 500 }} fontSize="4xl">{user.Name}</Text>
-                        {!followCheck?<Button onClick={()=>{follow(user._id)}} style={{marginTop:10,fontSize:15}} leftIcon={<FaUserPlus />} colorScheme="blue" variant="outline">
+                        {props.location.state.user===loggedin_user.email?null:<>{!followCheck?<Button onClick={()=>{follow(user._id)}} style={{marginTop:10,fontSize:15}} leftIcon={<FaUserPlus />} colorScheme="blue" variant="outline">
                             Follow
                         </Button>:
                         <Button onClick={()=>{unfollow(user._id)}} style={{marginTop:10,fontSize:15}} /* leftIcon={<FaUserPlus />} */ colorScheme="blue" variant="solid">
                             Unfollow
-                        </Button>}
+                        </Button>}</>}
                     </div>
                     <div className="ProfileDetailHolder">
                     <div ><Text  fontSize="lg">Total Posts</Text><Text className="ProfileCount" >{user.posts.length}</Text></div>
@@ -106,7 +126,9 @@ const Profile = (props) => {
                     </div>
                 </div>
                 
-                : <div>Nothing</div>}
+                : <div className="loader" >
+                   
+                    <div class="lds-ellipsis"><div></div><div></div><div></div><div></div></div></div>}
         </div>
     )
 
