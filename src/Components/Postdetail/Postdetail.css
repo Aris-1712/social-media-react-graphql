@@ -1,6 +1,6 @@
 .Postdetail{
-    margin-left: 15%;
-    margin-right: 15%;
-    margin-top: 20px;
-    margin-bottom: 20px;
+
+    padding: 20px;
+    max-width: 900px;
+    margin: 0px auto;
 }
