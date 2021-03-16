@@ -5,6 +5,7 @@ import axios from 'axios'
 import { Api } from '../../API/Api'
 import * as Actions from '../../Reducer/Actions'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 const Login = (props) => {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -19,7 +20,7 @@ const Login = (props) => {
         <div className="login">
             <div className="login_holder">
                 <img src={process.env.PUBLIC_URL + '/Logo/dark.png'}></img>
-                <Text fontSize="2xl">Signup</Text>
+                <Text fontSize="2xl">Signin</Text>
                 <Input placeholder="Enter Email" size="md" onChange={(e) => { setEmail(e.target.value) }} />
                 <InputGroup size="md">
                     <Input
@@ -34,6 +35,7 @@ const Login = (props) => {
                         </Button>
                     </InputRightElement>
                 </InputGroup>
+                <Link style={{textDecoration:"underline"}} to='/signup'>New User ?</Link>
                 <Button onClick={() => {
                     props.signin({ email: email, password: password })
                 }} colorScheme="blue">Login</Button>
